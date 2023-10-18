@@ -1,6 +1,6 @@
 import { google } from "googleapis";
 import { Readable } from "node:stream";
-import credentials from "../services/credentials.json";
+import credentials from "./credentials.json";
 
 const auth = new google.auth.GoogleAuth({
   credentials: credentials,
