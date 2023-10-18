@@ -1,5 +1,5 @@
 import { google } from "googleapis";
-import fs from "fs";
+import { Readable } from "node:stream";
 
 const auth = new google.auth.GoogleAuth({
   keyFile: process.cwd() + "/src/services/credentials.json",
@@ -9,15 +9,11 @@ const auth = new google.auth.GoogleAuth({
 const FOLDER_ID = "1xb-S25HVIzbzN4b1VLugYkKyLXBjLmjI";
 
 export const uploadFile = async (file: File) => {
-  const path = process.cwd() + "\\" + file.name;
   const drive = google.drive({ version: "v3", auth });
   try {
-    const buffer = await file.arrayBuffer();
-    fs.writeFile(path, new Uint8Array(buffer), (err) => {
-      if (err) throw err;
-    });
+    const buffer = Buffer.from(await file.arrayBuffer());
 
-    const res = await drive.files.create({
+    return await drive.files.create({
       requestBody: {
         name: file.name,
         parents: [FOLDER_ID],
@@ -25,17 +21,12 @@ export const uploadFile = async (file: File) => {
       },
       media: {
         mimeType: "image/jpeg",
-        body: fs.createReadStream(path),
+        body: Readable.from(buffer),
       },
       fields: "id",
     });
   } catch (error: any) {
+    console.log(error);
     return null;
-  } finally {
-    fs.unlink(path, (err) => {
-      if (err) {
-        console.log(err);
-      }
-    });
   }
 };

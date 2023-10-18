@@ -5,6 +5,9 @@ export async function POST(request: Request) {
   if (!formData.get("image")) return;
   const file = formData.get("image") as File;
 
-  uploadFile(file);
-  return Response.json({});
+  const data = await uploadFile(file);
+  if (data) {
+    return Response.json({}, { status: 200 });
+  }
+  return Response.json({}, { status: 500 });
 }

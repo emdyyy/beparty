@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import Image from "next/image";
+import toast from "react-hot-toast";
 
 export default function Home() {
   const [selectedImage, setSelectedImage] = useState<File | null>();
@@ -11,10 +12,17 @@ export default function Home() {
     const data = new FormData();
     data.append("image", selectedImage);
 
-    fetch("/api/image", {
-      method: "POST",
-      body: data,
-    });
+    toast.promise(
+      fetch("/api/image", {
+        method: "POST",
+        body: data,
+      }),
+      {
+        loading: "Loading...",
+        success: "Success!",
+        error: "Error occured",
+      }
+    );
   };
 
   return (
