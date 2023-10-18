@@ -42,6 +42,7 @@ export default function ImageUploader() {
       )}{" "}
       <input
         type="file"
+        accept="image/*"
         name="myImage"
         onChange={(event) => {
           if (!event.target.files) return;
