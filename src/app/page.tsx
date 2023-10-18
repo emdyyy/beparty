@@ -19,7 +19,7 @@ export default function Home() {
 
   return (
     <main>
-      <h1>Upload and Display Image usign React Hook's</h1>
+      <h1>Upload and Display Image</h1>
       {selectedImage && (
         <div>
           <Image
