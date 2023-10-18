@@ -1,8 +1,9 @@
 import { google } from "googleapis";
 import { Readable } from "node:stream";
+import credentials from "../services/credentials.json";
 
 const auth = new google.auth.GoogleAuth({
-  keyFile: process.cwd() + "/src/services/credentials.json",
+  credentials: credentials,
   scopes: ["https://www.googleapis.com/auth/drive"],
 });
 
