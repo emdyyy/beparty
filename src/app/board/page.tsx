@@ -1,6 +1,7 @@
 import { downloadImages } from "@/services/DriveService";
 import Image from "next/image";
 
+export const dynamic = "force-dynamic";
 export default async function BoardPage() {
   const images = await downloadImages();
 

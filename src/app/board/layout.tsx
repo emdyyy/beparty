@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
 
-export const dynamin = "force-dynamic";
 export default async function BoardLayout({
   children,
 }: {
