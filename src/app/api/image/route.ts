@@ -1,4 +1,4 @@
-import { uploadFile } from "@/services/DriveService";
+import { downloadImages, uploadFile } from "@/services/DriveService";
 
 export async function POST(request: Request) {
   const formData = await request.formData();
@@ -10,4 +10,9 @@ export async function POST(request: Request) {
     return Response.json({}, { status: data.status });
   }
   return Response.json({}, { status: 500 });
+}
+
+export async function GET(request: Request) {
+  const images = await downloadImages();
+  return Response.json(images, { status: 200 });
 }

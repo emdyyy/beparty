@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import { Toaster } from "react-hot-toast";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const font = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "BeParty",
@@ -17,12 +17,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pl">
-      <body className={inter.className + " bg-bg"}>
-        <Toaster position="bottom-center" />
-        <div className="max-w-sm mx-auto p-5">
-          <h1 className="font-bold text-2xl text-center p-3">
-            BeParty <span className="text-sm font-normal">Alpha</span>
-          </h1>
+      <body className={font.className + " bg-bg text-white"}>
+        <Toaster position="top-center" />
+        <div className="max-w-sm mx-auto p-3 min-h-screen flex flex-col">
+          <div className="py-5">
+            <h1 className="font-bold text-3xl text-center">18stka Mileny </h1>
+            <p className="text-sm font-normal text-center">BeParty</p>
+          </div>
           {children}
         </div>
       </body>
