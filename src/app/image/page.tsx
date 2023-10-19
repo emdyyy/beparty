@@ -87,7 +87,7 @@ export default function ImagePage() {
               type="file"
               className="hidden"
               accept="image/*"
-              capture
+              capture="user"
               onChange={(event) => {
                 handleImageCompression(event);
               }}
