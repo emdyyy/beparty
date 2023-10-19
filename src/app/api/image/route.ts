@@ -1,5 +1,4 @@
-import { downloadImages } from "@/services/DownloadService";
-import { uploadFile } from "@/services/UploadService";
+import { uploadFile } from "@/services/DriveService";
 
 export async function POST(request: Request) {
   const formData = await request.formData();

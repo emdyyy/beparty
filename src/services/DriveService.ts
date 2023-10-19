@@ -1,6 +1,7 @@
 import { google } from "googleapis";
 import credentials from "./credentials.json";
 import { v4 as uuidv4 } from "uuid";
+import { Readable } from "node:stream";
 
 const auth = new google.auth.GoogleAuth({
   credentials: credentials,
@@ -47,6 +48,8 @@ const getFile = (fileId: string) => {
 
 export const downloadImages = async () => {
   const { data } = await drive.files.list({
+    orderBy: "createdTime desc",
+    pageSize: 3,
     q: `'${FOLDER_ID}' in parents and trashed = false`,
   });
 
@@ -58,4 +61,27 @@ export const downloadImages = async () => {
     images.push(image);
   }
   return images;
+};
+
+export const uploadFile = async (file: File) => {
+  const drive = google.drive({ version: "v3", auth });
+  try {
+    const buffer = Buffer.from(await file.arrayBuffer());
+
+    return await drive.files.create({
+      requestBody: {
+        name: file.name,
+        parents: [FOLDER_ID],
+        mimeType: "image/jpeg",
+      },
+      media: {
+        mimeType: "image/jpeg",
+        body: Readable.from(buffer),
+      },
+      fields: "id",
+    });
+  } catch (error: any) {
+    console.log(error);
+    return null;
+  }
 };
