@@ -7,7 +7,7 @@ export async function POST(request: Request) {
 
   const data = await uploadFile(file);
   if (data) {
-    return Response.json({}, { status: 200 });
+    return Response.json({}, { status: data.status });
   }
   return Response.json({}, { status: 500 });
 }
