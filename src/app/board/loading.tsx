@@ -1,3 +1,3 @@
 export default async function LoadingBoardPage() {
-  return <div>Loading...</div>;
+  return <div>Ładuję...</div>;
 }

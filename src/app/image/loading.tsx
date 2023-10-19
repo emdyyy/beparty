@@ -1,3 +1,3 @@
 export default async function LoadingImagePage() {
-  return <div>Loading...</div>;
+  return <div>Ładuję...</div>;
 }
